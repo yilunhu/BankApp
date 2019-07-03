@@ -1,0 +1,11 @@
+C:\Users\Yi\source\repos\BankApp\BL\bin\Debug\BL.dll
+C:\Users\Yi\source\repos\BankApp\BL\bin\Debug\BL.pdb
+C:\Users\Yi\source\repos\BankApp\BL\bin\Debug\DAL.dll
+C:\Users\Yi\source\repos\BankApp\BL\bin\Debug\Entities.dll
+C:\Users\Yi\source\repos\BankApp\BL\bin\Debug\DAL.pdb
+C:\Users\Yi\source\repos\BankApp\BL\bin\Debug\Entities.pdb
+C:\Users\Yi\source\repos\BankApp\BL\obj\Debug\BL.csprojAssemblyReference.cache
+C:\Users\Yi\source\repos\BankApp\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
+C:\Users\Yi\source\repos\BankApp\BL\obj\Debug\BL.csproj.CopyComplete
+C:\Users\Yi\source\repos\BankApp\BL\obj\Debug\BL.dll
+C:\Users\Yi\source\repos\BankApp\BL\obj\Debug\BL.pdb
