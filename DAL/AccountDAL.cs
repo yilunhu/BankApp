@@ -240,7 +240,7 @@ namespace DAL
         {
             switch (AccountType)
             {
-                case "1":
+                case "Checking":
                     foreach (var item in Checkingaccounts)
                     {
                         if (Convert.ToInt32(AccountID) == item.AccountId)
@@ -258,6 +258,7 @@ namespace DAL
                                 };
                                 TransactionLog.Add(NewTransaction);
                                 item.Balance = item.Balance - Amount;
+                                return "sucesss";
                             }
                             else
                             {
@@ -266,7 +267,7 @@ namespace DAL
                         }
                     }                   
                     break;
-                case "2":
+                case "Loan":
                     foreach (var item in LoanAccounts)
                     {
                         if (Convert.ToInt32(AccountID) == item.AccountId)
@@ -294,7 +295,7 @@ namespace DAL
                         }
                     }
                     break;
-                case "3":
+                case "Business":
                     foreach (var item in BusinessAccounts)
                     {
                         if (Convert.ToInt32(AccountID) == item.AccountId)
@@ -322,7 +323,7 @@ namespace DAL
 
                     }
                     break;
-                case "4":
+                case "TermDeposit":
                     foreach (var item in TermDepositAccounts)
                     {
                         if (Convert.ToInt32(AccountID) == item.AccountId)
@@ -501,7 +502,7 @@ namespace DAL
                         break;
                     }
                     break;
-                case "Bussiness":
+                case "Business":
                     foreach (var item in BusinessAccounts)
                     {
                         if (Convert.ToInt32(YourAccountID) == item.AccountId)
@@ -529,7 +530,7 @@ namespace DAL
                                         }
                                     }
                                     break;
-                                case "Bussiness":
+                                case "Business":
                                     foreach (var itemb in BusinessAccounts)
                                     {
                                         if (Convert.ToInt32(SecondAccountID) == item.AccountId)
@@ -604,7 +605,7 @@ namespace DAL
                                         }
                                     }
                                     break;
-                                case "Bussiness":
+                                case "Business":
                                     foreach (var itemb in BusinessAccounts)
                                     {
                                         if (Convert.ToInt32(SecondAccountID) == item.AccountId)

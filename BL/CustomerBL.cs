@@ -78,6 +78,7 @@ namespace BL
             AccountDAL Adal = new AccountDAL();          
             string AccountType = Adal.AccountType(AccountID);
             var status = Adal.WithDrawDAL(AccountType, AccountID, Amount,Cust);
+            Console.WriteLine(status);
             return status;          
         }
         public string Deposit(string AccountID, string Amount, Customer Cust)
