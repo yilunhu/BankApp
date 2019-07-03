@@ -47,12 +47,13 @@ namespace BankApp
                         {
                             case "1":
                                 var OpenAccount = new CustomerBL();
-                                Console.WriteLine("Enter 1 For Checking,\n2 For loan,\n3 For Bussiness,\n4 For Term Deposit");
+                                Console.WriteLine("Enter 1 For Checking,\n2 For Business,\n3 For Loan,\n4 For Term Deposit");
                                 string AccountType = Console.ReadLine();
                                 if (AccountType == "1" || AccountType == "2" || AccountType == "3" || AccountType == "4")
                                 {
-                                    OpenAccount.OpenNewAccount(AccountType, c);
+                                    var AccInfo = OpenAccount.OpenNewAccount(AccountType, c);
                                     Console.WriteLine("Account Created...");
+                                    Console.WriteLine($"Your account Id is {AccInfo.AccountId}");
                                     
                                 }
                                 else {
@@ -62,13 +63,13 @@ namespace BankApp
                             case "2":                             
                                     var GetAccounts = new CustomerBL();
                                     var ListOfAccount = GetAccounts.DisplayAccounts(c);
-                                do { 
+                                //do { 
                                     Console.WriteLine("List of your Account...");
                                     foreach (var item in ListOfAccount)
                                     {
                                         Console.WriteLine($"AccountID -{item.Key} Account Type -{item.Value}");
                                     }
-                                    Console.WriteLine("Enter: 1- Deposit, 2-withdraw, 3-Transfer money,4-delete account,5-Display Transaction");
+                                    Console.WriteLine("Enter: 1- Deposit, 2-withdraw, 3-Transfer money, 4-delete account, 5-Display Transaction");
                                     string statement = Console.ReadLine();
                                     switch (statement)
                                     {
@@ -77,13 +78,13 @@ namespace BankApp
                                             string AccountId = Console.ReadLine();
                                             Console.WriteLine("Plese Enter the amount deposite: ");
                                             string Amount = Console.ReadLine();
-                                            GetAccounts.Deposit(AccountId, Convert.ToInt32(Amount), c);
+                                            GetAccounts.Deposit(AccountId, Amount, c);
                                             break;
 
                                         case "2": //withdraw
                                             Console.WriteLine("Plese select an account by entering the accountId: ");
                                             AccountId = Console.ReadLine();
-                                            Console.WriteLine("Plese Enter the amount deposite: ");
+                                            Console.WriteLine("Plese Enter the amount withdraw: ");
                                             Amount = Console.ReadLine();
                                             GetAccounts.Withdraw(AccountId, Convert.ToInt32(Amount), c);
                                             break;
@@ -105,18 +106,19 @@ namespace BankApp
                                         case "5"://show transaction List
                                             Console.WriteLine($"Fetching Transaction for {c.FirstName} {c.LastName}");
                                             var TrasnactionList = new CustomerBL();
-                                            var Dispalylist = TrasnactionList.DispalyTransaction(c.CustomerId.ToString());
+                               
+                                            var Dispalylist = TrasnactionList.DispalyTransaction(c.CustomerId);
                                             foreach (var item in Dispalylist)
                                             {
-                                                Console.WriteLine($"{item.AccountIDA} {item.AmountInTransaction}{item.TransactionTime}");
+                                                Console.WriteLine($"Account ID{item.AccountIDA} Amount: {item.AmountInTransaction} Time: {item.TransactionTime}");
                                             }
                                             break;
                                         default:
                                             break;
                                     }
-                                    Console.WriteLine("Do you wish to continue? y/n...");
-                                    Continue1 = Console.ReadLine();
-                         }while (Continue1 == "Y"|| Continue == "y");
+                         //           Console.WriteLine("Do you wish to continue? y/n...");
+                         //           Continue1 = Console.ReadLine();
+                         //}while (Continue1 == "Y"|| Continue == "y");
                                 break;
                                 
                                 

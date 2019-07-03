@@ -22,7 +22,7 @@ namespace DAL
         static List<TermDeposit> TermDepositAccounts= new List<TermDeposit>();
         static List<Business> BusinessAccounts= new List<Business>();
         static List<Transaction> TransactionLog = new List<Transaction>();
-        public void CreateAccount(string acccounttype, Customer Cust) {
+        public Accounts CreateAccount(string acccounttype, Customer Cust) {
             switch (acccounttype)
             {
                 case "1":
@@ -34,9 +34,9 @@ namespace DAL
                     };
                     Cust.Account.Add(a.AccountId, a.AccountType);
                     Checkingaccounts.Add(a);
-                   // AllAccounts.Add(a.AccountId, a.AccountType);
+                    AllAccounts.Add(a.AccountId, a.AccountType);
                     Id++;
-                    break;
+                    return a;
                 case "2":
                     var b = new Business()                  
                     {
@@ -48,8 +48,8 @@ namespace DAL
                     Id++;
                     Cust.Account.Add(b.AccountId, b.AccountType);
                     BusinessAccounts.Add(b);
-                 //   AllAccounts.Add(b.AccountId, b.AccountType);
-                    break;
+                    AllAccounts.Add(b.AccountId, b.AccountType);
+                    return b;
                 case "3":
                     var c = new Loan()
                     {
@@ -62,8 +62,8 @@ namespace DAL
                     LoanAccounts.Add(c);
                     Cust.Account.Add(c.AccountId, c.AccountType);
 
-                    //   AllAccounts.Add(c.AccountId, c.AccountType);
-                    break;
+                       AllAccounts.Add(c.AccountId, c.AccountType);
+                    return c;
                 case "4":
                     var d = new TermDeposit()
                     {
@@ -75,14 +75,14 @@ namespace DAL
                     Id++; 
                     TermDepositAccounts.Add(d);
                     Cust.Account.Add(d.AccountId, d.AccountType);
-                    //   AllAccounts.Add(d.AccountId, d.AccountType);
-                    break;
+                       AllAccounts.Add(d.AccountId, d.AccountType);
+                    return d;
                 default:
                     Console.WriteLine("Invaild Value Entered");
                     Console.WriteLine("Please enter a number from 1-4");
                     var x = Console.ReadLine();
                     CreateAccount(x, Cust);
-                    break;
+                    return null;
             }
 
         }
@@ -355,7 +355,7 @@ namespace DAL
         {
             switch (AccountType)
             {
-                case "1":
+                case "Checking":
                     foreach (var item in Checkingaccounts)
                     {
                         if (Convert.ToInt32(AccountID) == item.AccountId)
@@ -370,13 +370,13 @@ namespace DAL
 
                             };
                             TransactionLog.Add(NewTransaction);
-                            item.Balance = item.Balance + Amount;
+                            item.Balance += Amount;
                             return "Sucess";
     
                         }
                     }
                     break;
-                case "2":
+                case "Business":
                     foreach (var item in BusinessAccounts)
                     {
                         if (Convert.ToInt32(AccountID) == item.AccountId)
@@ -396,7 +396,7 @@ namespace DAL
                         }
                     }
                     break;
-                case "3":
+                case "TermDeposit":
                     foreach (var item in TermDepositAccounts)
                     {
                         if (Convert.ToInt32(AccountID) == item.AccountId)
@@ -676,13 +676,13 @@ namespace DAL
             return "Failed";
         }
   
-        public List<Transaction> DispalyTransactionDAL(string CustomerId)
+        public List<Transaction> DispalyTransactionDAL(int CustomerId)
         {
-            var Temp = new List<Transaction>();
+            List<Transaction> Temp = new List<Transaction>();
             foreach(var item in TransactionLog)
             {
                 if(item.CustomerId == Convert.ToInt32(CustomerId))
-                {
+                {                   
                     Temp.Add(item);
                 }
             }

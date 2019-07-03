@@ -35,7 +35,7 @@ namespace Entities
     public class TermDeposit : Accounts
     {
         public int TermDepositAmount = 1000;
-        public string AccountType = "Business";
+        public string AccountType = "TermDeposit";
         public DateTime Maturity;
     }
 }

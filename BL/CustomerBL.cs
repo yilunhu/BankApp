@@ -58,17 +58,19 @@ namespace BL
         //    return acc;
         //}
 
-        public void OpenNewAccount(string Account,Customer CustId)
+        public Accounts OpenNewAccount(string Account,Customer CustId)
         {
             AccountDAL ADal = new AccountDAL();
-            ADal.CreateAccount(Account, CustId);
+            var accinfo = ADal.CreateAccount(Account, CustId);
             CustId.NumberOfAccount++;
+            return accinfo;
         }
         public string CloseAccount(Customer Customer, string AccountID)
         {
             AccountDAL Adal = new AccountDAL();
             string AccountType = Adal.AccountType(AccountID);
             var status = Adal.CloseAccountDAL(AccountType, AccountID, Customer);
+            Console.WriteLine(status);
             return status;
         }
         public string Withdraw(string AccountID, int Amount, Customer Cust)
@@ -78,11 +80,12 @@ namespace BL
             var status = Adal.WithDrawDAL(AccountType, AccountID, Amount,Cust);
             return status;          
         }
-        public string Deposit(string AccountID, int Amount, Customer Cust)
+        public string Deposit(string AccountID, string Amount, Customer Cust)
         {
+            int Am = Convert.ToInt32(Amount);
             AccountDAL Adal = new AccountDAL();
             string AccountType = Adal.AccountType(AccountID);
-            var status = Adal.DepositDAL(AccountType, AccountID, Amount, Cust);
+            var status = Adal.DepositDAL(AccountType, AccountID, Am, Cust);
             Console.WriteLine(status);
             return status;
 
@@ -110,7 +113,7 @@ namespace BL
             var list = Adal.DisplayAccountsDAL(Cust);
             return list;
         }
-        public List<Transaction> DispalyTransaction(string CustomerId)
+        public List<Transaction> DispalyTransaction(int CustomerId)
         {
             AccountDAL Adal = new AccountDAL();
             List<Transaction> status = Adal.DispalyTransactionDAL(CustomerId);
